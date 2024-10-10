@@ -31,13 +31,16 @@ const MovieList: React.FC = () => {
   return (
     <div>
       <h2>To watch list:</h2>
-      <input
-        type="text"
-        value={newMovie}
-        onChange={(e) => setNewMovie(e.target.value)}
-        placeholder="Add new movie title"
-      />
-      <button onClick={addMovie}>Add</button>
+      <div>
+        <input className='mb-3'
+          type="text"
+          value={newMovie}
+          onChange={(e) => setNewMovie(e.target.value)}
+          placeholder="Add new movie title"
+        />
+        <button type='button' className='ms-2 btn btn-success' onClick={addMovie}>Add</button>
+      </div>
+
 
       <ul>
         {movies.map((movie) => (

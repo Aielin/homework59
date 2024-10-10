@@ -10,12 +10,12 @@ interface MovieItemProps {
 const MovieItem:React.FC<MovieItemProps> = React.memo(({ id, value, onDelete, onUpdate }) => {
   return (
     <li>
-      <input
+      <input className='mb-3 me-1'
         type="text"
         value={value}
         onChange={(e) => onUpdate(id, e.target.value)}
       />
-  <button onClick={() => onDelete(id)}>Удалить</button>
+  <button className='btn btn-warning' type='button' onClick={() => onDelete(id)}>Удалить</button>
   </li>
   );
 }, (prevProps, nextProps) => {
