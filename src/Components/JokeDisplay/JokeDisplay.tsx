@@ -1,4 +1,5 @@
 import React from 'react';
+import FetchButton from '../FetchButton/FetchButton.tsx';
 
 interface JokeDisplayProps{
   jokes: string[];
@@ -19,10 +20,7 @@ const JokeDisplay:React.FC<JokeDisplayProps> = ({ jokes, onClick }) => {
       ) : (
         <div className="alert alert-secondary mt-4">Здесь появятся шутки...</div>
       )}
-
-      <button type='button' className="btn btn-primary mt-3" onClick={onClick}>
-        Получить новые шутки
-      </button>
+      <FetchButton onClick={onClick}/>
     </div>
   );
 };
