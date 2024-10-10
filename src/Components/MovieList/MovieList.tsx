@@ -11,6 +11,10 @@ const MovieList: React.FC = () => {
     }
   };
 
+  const deleteMovie = (index: number) => {
+    setMovies(movies.filter((_, i) => i !== index));
+  };
+
   return (
     <div>
       <h2>To watch list:</h2>
@@ -23,7 +27,11 @@ const MovieList: React.FC = () => {
       <button onClick={addMovie}>Add</button>
       <ul>
         {movies.map((movie, index) => (
-          <li key={index}>{movie}</li>
+          <li
+            key={index}>
+            {movie}
+            <button onClick={() => deleteMovie(index)}>Delete</button>
+          </li>
         ))}
       </ul>
     </div>
