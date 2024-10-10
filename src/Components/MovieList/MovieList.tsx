@@ -1,19 +1,32 @@
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import MovieItem from '../MovieItem/MovieItem.tsx';
 
 const MovieList: React.FC = () => {
-  const [movies, setMovies] = useState<string[]>([]);
+  const [movies, setMovies] = useState<{ id:number; title:string}[]>([]);
   const [newMovie, setNewMovie] = useState('');
 
   const addMovie = () => {
     if (newMovie.trim()) {
-      setMovies([...movies, newMovie]);
+      setMovies([...movies, { id: new Date().getTime(), title: newMovie }]);
       setNewMovie('');
     }
   };
 
-  const deleteMovie = (index: number) => {
-    setMovies(movies.filter((_, i) => i !== index));
-  };
+  const deleteMovie = useCallback(
+    (id: number) => {
+      setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== id));
+    },[setMovies]
+  );
+
+  const updateMovie = useCallback(
+    (id: number, updatedValue: string) => {
+      setMovies((prevMovies) =>
+        prevMovies.map((movie) =>
+          movie.id === id ? { ...movie, title: updatedValue } : movie
+        )
+      );
+    }, [setMovies]
+  );
 
   return (
     <div>
@@ -22,16 +35,19 @@ const MovieList: React.FC = () => {
         type="text"
         value={newMovie}
         onChange={(e) => setNewMovie(e.target.value)}
-        placeholder="Add new movie"
+        placeholder="Add new movie title"
       />
       <button onClick={addMovie}>Add</button>
+
       <ul>
-        {movies.map((movie, index) => (
-          <li
-            key={index}>
-            {movie}
-            <button onClick={() => deleteMovie(index)}>Delete</button>
-          </li>
+        {movies.map((movie) => (
+          <MovieItem
+            key={movie.id}
+            id={movie.id}
+            value={movie.title}
+            onDelete={deleteMovie}
+            onUpdate={updateMovie}
+          />
         ))}
       </ul>
     </div>
