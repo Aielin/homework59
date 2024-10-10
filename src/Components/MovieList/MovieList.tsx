@@ -1,9 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import MovieItem from '../MovieItem/MovieItem.tsx';
 
 const MovieList: React.FC = () => {
   const [movies, setMovies] = useState<{ id:number; title:string}[]>([]);
   const [newMovie, setNewMovie] = useState('');
+
+  useEffect(() => {
+    const storedMovies = localStorage.getItem('movies');
+    if (storedMovies) {
+      setMovies(JSON.parse(storedMovies));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('movies', JSON.stringify(movies));
+  }, [movies]);
 
   const addMovie = () => {
     if (newMovie.trim()) {
@@ -18,15 +29,11 @@ const MovieList: React.FC = () => {
     },[setMovies]
   );
 
-  const updateMovie = useCallback(
-    (id: number, updatedValue: string) => {
-      setMovies((prevMovies) =>
-        prevMovies.map((movie) =>
-          movie.id === id ? { ...movie, title: updatedValue } : movie
-        )
-      );
-    }, [setMovies]
-  );
+  const updateMovie = useCallback((id: number, updatedValue: string) => {
+    setMovies((prevMovies) =>
+      prevMovies.map((movie) => (movie.id === id ? { ...movie, title: updatedValue } : movie))
+    );
+  }, []);
 
   return (
     <div>
@@ -40,7 +47,6 @@ const MovieList: React.FC = () => {
         />
         <button type='button' className='ms-2 btn btn-success' onClick={addMovie}>Add</button>
       </div>
-
 
       <ul>
         {movies.map((movie) => (
