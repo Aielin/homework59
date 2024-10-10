@@ -10,17 +10,19 @@ const JokeDisplay:React.FC<JokeDisplayProps> = ({ jokes, onClick }) => {
   return (
     <div>
       {jokes.length > 0 ? (
-        <ul className="list-group mt-4">
+        <ul className='list-group mb-4'>
           {jokes.map((joke, index) => (
-            <li key={index} className="list-group-item">
+            <li key={index} className="list-group-item bg-light">
               {joke}
             </li>
           ))}
         </ul>
       ) : (
-        <div className="alert alert-secondary mt-4">Здесь появятся шутки...</div>
+        <div className='alert alert-secondary mt-4'>Здесь появятся шутки...</div>
       )}
-      <FetchButton onClick={onClick}/>
+      <div className='text-center'>
+        <FetchButton onClick={onClick}/>
+      </div>
     </div>
   );
 };

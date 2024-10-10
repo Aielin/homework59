@@ -6,7 +6,7 @@ interface FetchButtonProps {
 
 const FetchButton: React.FC<FetchButtonProps> = ({ onClick }) => {
   return (
-    <button type='button' className="btn btn-primary mt-3" onClick={onClick}>
+    <button type='button' className='btn btn-primary' onClick={onClick}>
       Получить новые шутки
     </button>
   );

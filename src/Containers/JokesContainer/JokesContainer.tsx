@@ -26,9 +26,13 @@ const JokesContainer:React.FC = () => {
   },);
 
   return (
-    <div className="container">
-      <h2>Joke Generator</h2>
-      <JokeDisplay jokes={jokes} onClick={fetchMultipleJokes} />
+    <div className='container mt-5'>
+      <div className='card shadow p-3 mb-5 bg-light rounded'>
+        <h2 className='card-header text-center text-success'>Joke Generator</h2>
+        <div className='card-body'>
+          <JokeDisplay jokes={jokes} onClick={fetchMultipleJokes}/>
+        </div>
+      </div>
     </div>
   );
 };
