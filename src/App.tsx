@@ -7,7 +7,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <button onClick={() => setPage(!page)}>Change task</button>
+      <button type='button' className='btn btn-warning' onClick={() => setPage(!page)}>Change task</button>
 
       {page ? <MoviesContainer /> : <JokesContainer /> }
 

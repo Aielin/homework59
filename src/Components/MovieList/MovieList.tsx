@@ -39,13 +39,13 @@ const MovieList: React.FC = () => {
     <div>
       <h2>To watch list:</h2>
       <div>
-        <input className='mb-3'
+        <input className='form-control mb-2'
           type="text"
           value={newMovie}
           onChange={(e) => setNewMovie(e.target.value)}
           placeholder="Add new movie title"
         />
-        <button type='button' className='ms-2 btn btn-success' onClick={addMovie}>Add</button>
+        <button type='button' className='btn btn-primary w-100' onClick={addMovie}>Add</button>
       </div>
 
       <ul>
